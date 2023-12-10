@@ -1,15 +1,15 @@
-from django.db import models
-from django.dispatch import receiver
-from vendor.models import PerformanceModel
-from django.db.models.signals import post_save
-from django.db.models import F, Avg, ExpressionWrapper, fields
-from django.db.models.functions import Coalesce
-
-
 from datetime import datetime
-from django.core.validators import MaxValueValidator, MinValueValidator
 
-from vendor.models import VendorModel
+from django.core.validators import MaxValueValidator, MinValueValidator
+from django.db import models
+from django.db.models import Avg, ExpressionWrapper, F, fields
+from django.db.models.functions import Coalesce
+from django.db.models.signals import post_save
+from django.dispatch import receiver
+
+from vendor.models import PerformanceModel, VendorModel
+
+
 # Create your models here.
 class OrderModel(models.Model):
     PO_STATUS = (
@@ -27,12 +27,13 @@ class OrderModel(models.Model):
     quality_rating = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)], null=True)
     issue_date = models.DateTimeField(null=True)
     acknowledgment_date = models.DateTimeField(null=True)
-    
+
     class Meta:
-        db_table = "order" 
-        
+        db_table = "order"
+
+
 @receiver(post_save, sender=OrderModel)
-def _post_save_receiver(sender, instance,**kwargs):
+def _post_save_receiver(sender, instance, **kwargs):
     vendor_orders = OrderModel.objects.filter(vendor=instance.vendor)
     completed_orders = vendor_orders.filter(status="Complete")
 
@@ -46,12 +47,13 @@ def _post_save_receiver(sender, instance,**kwargs):
         performance.quality_rating_avg = completed_orders.aggregate(avg_quality_rating=Avg("quality_rating"))["avg_quality_rating"]
 
     if instance.acknowledgment_date is not None:
-        response_times = vendor_orders.filter(acknowledgment_date__isnull=False).annotate(
-            subtraction_result=ExpressionWrapper(
-                F('acknowledgment_date') - F('issue_date'),
-                output_field=fields.FloatField()
+        response_times = (
+            vendor_orders.filter(acknowledgment_date__isnull=False)
+            .annotate(
+                subtraction_result=ExpressionWrapper(F("acknowledgment_date") - F("issue_date"), output_field=fields.FloatField())
             )
-        ).aggregate(avg_subtraction=Coalesce(Avg('subtraction_result'), 0.0))
+            .aggregate(avg_subtraction=Coalesce(Avg("subtraction_result"), 0.0))
+        )
 
         performance.average_response_time = response_times["avg_subtraction"]
 
@@ -59,5 +61,3 @@ def _post_save_receiver(sender, instance,**kwargs):
     performance.fulfillment_rate = round((count_delivered_on_time / total_orders) * 10, 2)
 
     performance.save()
-    
-

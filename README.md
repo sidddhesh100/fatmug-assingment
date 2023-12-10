@@ -131,4 +131,3 @@ This Django-based Vendor Management System (VMS) is designed to handle vendor pr
 
 - **Real-time Updates:**
   - Consider using Django signals to trigger metric updates in real-time when related PO data is modified.
-

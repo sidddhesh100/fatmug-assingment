@@ -1,5 +1,10 @@
+from django.core.validators import (
+    MaxValueValidator,
+    MinLengthValidator,
+    MinValueValidator,
+)
 from django.db import models
-from django.core.validators import MaxValueValidator, MinValueValidator, MinLengthValidator
+
 
 # Create your models here.
 class VendorModel(models.Model):
@@ -13,11 +18,11 @@ class VendorModel(models.Model):
     quality_rating_avg = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)], null=True)
     average_response_time = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)], null=True)
     fulfillment_rate = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)], null=True)
-    
+
     class Meta:
-        db_table = "vendor" 
-        
-        
+        db_table = "vendor"
+
+
 class PerformanceModel(models.Model):
     vendor = models.OneToOneField(VendorModel, on_delete=models.DO_NOTHING, primary_key=True)
     created_date = models.DateTimeField(auto_now_add=True)
@@ -25,6 +30,6 @@ class PerformanceModel(models.Model):
     quality_rating_avg = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)], null=True)
     average_response_time = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)], null=True)
     fulfillment_rate = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)], null=True)
-    
+
     class Meta:
         db_table = "performance"

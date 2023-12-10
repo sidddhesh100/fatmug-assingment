@@ -1,0 +1,360 @@
+{
+	"info": {
+		"_postman_id": "3c5c5b0b-7eea-48f5-8955-4e19ba5d3de8",
+		"name": "fatmug",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "23622407"
+	},
+	"item": [
+		{
+			"name": "create vendor",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"siddhesh angane\",\n    \"contact_details\": \"9876543212\",\n    \"address\": \"kjashdflkasdlkf\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST_URL}}vendor/",
+					"host": [
+						"{{HOST_URL}}vendor"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get list  of vendors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST_URL}}vendor/",
+					"host": [
+						"{{HOST_URL}}vendor"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get vendor using vendor code",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST_URL}}http://127.0.0.1:8000/vendor/2/",
+					"protocol": "{{HOST_URL}}http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8000",
+					"path": [
+						"vendor",
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update vendor using vendor code",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST_URL}}vendor/",
+					"host": [
+						"{{HOST_URL}}vendor"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete vendor using vendor code",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST_URL}}vendor/1/",
+					"host": [
+						"{{HOST_URL}}vendor"
+					],
+					"path": [
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"vendor\": 2,\n    \"delivery_date\": \"2023-12-14\",\n    \"items\": {\n                \"name\": \"siddhesh\"\n            },\n    \"quantity\": 12,\n    \"status\": \"Complete\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST_URL}}order/",
+					"host": [
+						"{{HOST_URL}}order"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get all orders",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST_URL}}order/",
+					"host": [
+						"{{HOST_URL}}order"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get order using po_id",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST_URL}}order/1/",
+					"host": [
+						"{{HOST_URL}}order"
+					],
+					"path": [
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "delete order",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST_URL}}order/1/",
+					"host": [
+						"{{HOST_URL}}order"
+					],
+					"path": [
+						"1",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "update order",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"status\": \"Complete\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST_URL}}order/2/",
+					"host": [
+						"{{HOST_URL}}order"
+					],
+					"path": [
+						"2",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "get vendor performance",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST_URL}}vendor/3/performance/",
+					"host": [
+						"{{HOST_URL}}vendor"
+					],
+					"path": [
+						"3",
+						"performance",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "acknowledge order",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "token {{TOKEN}}",
+						"type": "text"
+					}
+				],
+				"url": {
+					"raw": "{{HOST_URL}}order/2/acknowledge/?vendor_id=2",
+					"host": [
+						"{{HOST_URL}}order"
+					],
+					"path": [
+						"2",
+						"acknowledge",
+						""
+					],
+					"query": [
+						{
+							"key": "vendor_id",
+							"value": "2"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "toke_api",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"username\": \"siddhesh\",\n    \"password\": \"admin\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{HOST_URL}}api-token-auth/",
+					"host": [
+						"{{HOST_URL}}api-token-auth"
+					],
+					"path": [
+						""
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
