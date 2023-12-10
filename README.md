@@ -24,8 +24,8 @@ This Django-based Vendor Management System (VMS) is designed to handle vendor pr
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/yourusername/vendor-management-system.git
-   cd vendor-management-system
+   git clone git@github.com:sidddhesh100/fatmug-assingment.git
+   cd fatmug-assingment
    ```
 
 2. Create a virtual environment:
@@ -48,60 +48,120 @@ This Django-based Vendor Management System (VMS) is designed to handle vendor pr
    pip install -r requirements.txt
    ```
 
-5. Apply migrations:
+6. Create migration files:
+   ```bash
+   python manage.py makemigrations
+   ```
+
+6. Apply migrations:
    ```bash
    python manage.py migrate
    ```
 
-6. Run the development server:
+7. create a user:
+   ```bash
+   python manage.py createsuperuser
+   ```
+   To create user after running the above command enter username, email id and passowrd
+
+8. Run the development server:
    ```bash
    python manage.py runserver
    ```
 
+## Postman Setup
+
+Setup a postman collection to test the API endpoints
+
+1. **Open Postman**
+    - Launch the Postman application on your machine.
+
+2. **Import the Collection**
+    - In the Postman app, click on the "Import" button in the top-left corner.
+    - Choose the option to "Import From File" and select the downloaded `fatmug.postman_collection.json` file.
+
+4. **Verify Import**
+    - Once imported, you should see the new collection in the left sidebar under "Collections."
+
+5. **Environment Setup**
+    - Replace the environment HOST_URL with python application running url
+    - Also execute the get token api and add the token TOKEN environment variable
+
+6. **Test API endpoints**
+    - Test the below API endpoint by changing the request payload, query params and path strings
+
 ## API Endpoints
 
-### 1. Vendor Profile Management
+### 2. Create Token api
+
+- **Create a new Toekn:**
+  - Endpoint: `POST /api-token-auth/`
+  - Request body: JSON data containing username and password used while creating user. Send the toke into request Header.
+
+### 2. Vendor Profile Management
 
 - **Create a new vendor:**
-  - Endpoint: `POST /api/vendors/`
+  - Endpoint: `POST /vendor/`
+  - Header:
+      Authorization: token {{TOKEN}}
   - Request body: JSON data containing vendor details.
 
 - **List all vendors:**
-  - Endpoint: `GET /api/vendors/`
+  - Endpoint: `GET /vendors/`
+  - Header:
+      Authorization: token {{TOKEN}}
 
 - **Retrieve a specific vendor's details:**
-  - Endpoint: `GET /api/vendors/{vendor_id}/`
+  - Endpoint: `GET /vendor/{vendor_id}/`
+  - Header:
+      Authorization: token {{TOKEN}}
 
 - **Update a vendor's details:**
-  - Endpoint: `PUT /api/vendors/{vendor_id}/`
+  - Endpoint: `PUT /vendor/{vendor_id}/`
+  - Header:
+      Authorization: token {{TOKEN}}
   - Request body: JSON data containing updated vendor details.
 
 - **Delete a vendor:**
-  - Endpoint: `DELETE /api/vendors/{vendor_id}/`
+  - Header:
+      Authorization: token {{TOKEN}}
+  - Endpoint: `DELETE /vendor/{vendor_id}/`
 
-### 2. Purchase Order Tracking
+### 3. Purchase Order Tracking
 
 - **Create a purchase order:**
-  - Endpoint: `POST /api/purchase_orders/`
+  - Endpoint: `POST /order/`
+  - Header:
+      Authorization: token {{TOKEN}}
   - Request body: JSON data containing purchase order details.
 
 - **List all purchase orders:**
-  - Endpoint: `GET /api/purchase_orders/`
+  - Endpoint: `GET /order/`
+  - Header:
+      Authorization: token {{TOKEN}}
 
 - **Retrieve details of a specific purchase order:**
-  - Endpoint: `GET /api/purchase_orders/{po_id}/`
+  - Endpoint: `GET /order/{po_id}/`
+  - Header:
+      Authorization: token {{TOKEN}}
 
 - **Update a purchase order:**
-  - Endpoint: `PUT /api/purchase_orders/{po_id}/`
+  - Endpoint: `PUT /order/{po_id}/`
+  - Header:
+      Authorization: token {{TOKEN}}
   - Request body: JSON data containing updated purchase order details.
 
 - **Delete a purchase order:**
-  - Endpoint: `DELETE /api/purchase_orders/{po_id}/`
+  - Endpoint: `DELETE /order/{po_id}/`
+  - Header:
+      Authorization: token {{TOKEN}}
 
-### 3. Vendor Performance Evaluation
+### 4. Vendor Performance Evaluation
 
 - **Retrieve a vendor's performance metrics:**
-  - Endpoint: `GET /api/vendors/{vendor_id}/performance`
+  - Endpoint: `GET /vendor/{vendor_id}/performance`
+  - Header:
+      Authorization: token {{TOKEN}}
 
 ### Backend Logic
 
